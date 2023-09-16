@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ricardorsdev.hearthstonesearch.domain.model.Resource
 import com.ricardorsdev.hearthstonesearch.domain.use_case.get_cards.GetCardsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class CardListViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase
 ): ViewModel() {
 
-    private var _state = mutableStateOf<CardListUiState>(CardListUiState.Loading)
+    private var _state = MutableStateFlow<CardListUiState>(CardListUiState.Loading)
     val state = _state
 
     init {
