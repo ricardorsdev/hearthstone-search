@@ -1,7 +1,8 @@
 package com.ricardorsdev.hearthstonesearch.data.remote.dto
 
+import com.ricardorsdev.hearthstonesearch.domain.model.Battlegrounds
+
 data class BattlegroundsDto(
-    val companionId: Int,
     val hero: Boolean,
     val image: String,
     val imageGold: String,
@@ -10,3 +11,13 @@ data class BattlegroundsDto(
     val tier: Int,
     val upgradeId: Int
 )
+
+fun BattlegroundsDto.toBattlegrounds(): Battlegrounds {
+    return Battlegrounds(
+        hero = hero,
+        image = image,
+        quest = quest,
+        reward = reward,
+        tier = tier
+    )
+}
