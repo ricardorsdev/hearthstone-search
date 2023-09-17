@@ -43,8 +43,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-        //TODO: remove it after validation
-        viewModel
     }
 }
