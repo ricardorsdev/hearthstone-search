@@ -17,7 +17,7 @@ class CardListViewModel @Inject constructor(
     private val getCardsUseCase: GetCardsUseCase
 ): ViewModel() {
 
-    private var _state = MutableStateFlow<CardListUiState>(CardListUiState.Loading)
+    private var _state: MutableState<CardListUiState> = mutableStateOf(CardListUiState.Loading)
     val state = _state
 
     init {

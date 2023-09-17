@@ -1,4 +1,4 @@
-package com.ricardorsdev.hearthstonesearch
+package com.ricardorsdev.hearthstonesearch.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,10 +7,11 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.ricardorsdev.hearthstonesearch.presentation.card_list.CardListScreen
 import com.ricardorsdev.hearthstonesearch.presentation.card_list.CardListViewModel
 import com.ricardorsdev.hearthstonesearch.presentation.ui.theme.HearthstoneSearchTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,28 +29,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CardListScreen.route
+                    ) {
+                        composable(
+                            route = Screen.CardListScreen.route
+                        ) {
+                            CardListScreen(navController)
+                        }
+                    }
                 }
             }
         }
 
         //TODO: remove it after validation
         viewModel
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HearthstoneSearchTheme {
-        Greeting("Android")
     }
 }
