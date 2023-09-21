@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.ricardorsdev.hearthstonesearch.presentation.Screen
 import com.ricardorsdev.hearthstonesearch.presentation.card_list.component.CardListItem
 
 @Composable
@@ -34,13 +35,13 @@ fun CardListScreen(
         when (state) {
             is CardListUiState.Success -> {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    itemsIndexed(state.items) { index, card ->
+                    itemsIndexed(state.cards) { index, card ->
                         CardListItem(card = card, onItemClick = {
                             //TODO: implement navigation to Details
                         })
                         Divider(
                             modifier = Modifier.alpha(
-                                if (index == state.items.lastIndex) 0f else 1f
+                                if (index == state.cards.lastIndex) 0f else 1f
                             )
                         )
                     }

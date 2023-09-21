@@ -13,4 +13,5 @@ object Constants {
     const val BEARER_ACCESS_TOKEN = "Bearer "
     const val HEARTHSTONE_SHARED_PREFS = "hearthstone_shared_prefs"
     const val PREFS_ACCESS_TOKEN = "prefs_access_token"
+    const val PARAM_CARD_ID = "cardId"
 }
