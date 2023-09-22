@@ -16,6 +16,7 @@ fun BattlegroundsDto.toBattlegrounds(): Battlegrounds {
     return Battlegrounds(
         hero = hero,
         image = image,
+        imageGold = imageGold,
         quest = quest,
         reward = reward,
         tier = tier

@@ -37,7 +37,7 @@ fun CardListScreen(
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     itemsIndexed(state.cards) { index, card ->
                         CardListItem(card = card, onItemClick = {
-                            //TODO: implement navigation to Details
+                            navController.navigate(Screen.CardDetailScreen.route + "/${card.id}")
                         })
                         Divider(
                             modifier = Modifier.alpha(

@@ -2,4 +2,8 @@
     <string name="app_name">HearthstoneSearch</string>
     <string name="tavern_tier">Tavern Tier</string>
     <string name="card_image">Card Image</string>
+    <string name="cropped_image">Cropped Image</string>
+    <string name="card_effect">Card Effect</string>
+    <string name="normal_version">Normal version</string>
+    <string name="golden_version">Golden version</string>
 </resources>

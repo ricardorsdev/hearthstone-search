@@ -12,4 +12,8 @@ class CardRepositoryImpl @Inject constructor (
     override suspend fun getCards(): List<Card> {
         return service.getCards().cards.map { it.toCard() }
     }
+
+    override suspend fun getCardDetail(cardId: Int): Card {
+        return service.getCardDetail(cardId).toCard()
+    }
 }
