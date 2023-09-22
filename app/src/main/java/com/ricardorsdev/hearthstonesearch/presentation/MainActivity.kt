@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ricardorsdev.hearthstonesearch.presentation.card_detail.CardDetailScreen
 import com.ricardorsdev.hearthstonesearch.presentation.card_list.CardListScreen
 import com.ricardorsdev.hearthstonesearch.presentation.card_list.CardListViewModel
 import com.ricardorsdev.hearthstonesearch.presentation.ui.theme.HearthstoneSearchTheme
@@ -38,6 +39,11 @@ class MainActivity : ComponentActivity() {
                             route = Screen.CardListScreen.route
                         ) {
                             CardListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.CardDetailScreen.route + "/{cardId}"
+                        ) {
+                            CardDetailScreen()
                         }
                     }
                 }

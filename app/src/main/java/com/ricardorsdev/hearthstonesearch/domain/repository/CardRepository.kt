@@ -5,4 +5,5 @@ import com.ricardorsdev.hearthstonesearch.domain.model.Card
 interface CardRepository {
 
     suspend fun getCards(): List<Card>
+    suspend fun getCardDetail(cardId: Int): Card
 }

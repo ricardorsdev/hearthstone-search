@@ -99,7 +99,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providessSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+    fun providesSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences(Constants.HEARTHSTONE_SHARED_PREFS, Context.MODE_PRIVATE)
     }
 }
