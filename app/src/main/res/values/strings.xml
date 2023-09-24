@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">HearthstoneSearch</string>
+    <string name="app_name">Hearthstone Battlegrounds Search</string>
     <string name="tavern_tier">Tavern Tier</string>
+    <string name="minion_attack">Minion Attack</string>
+    <string name="minion_health">Minion Health</string>
     <string name="card_image">Card Image</string>
     <string name="cropped_image">Cropped Image</string>
     <string name="card_effect">Card Effect</string>
     <string name="normal_version">Normal version</string>
     <string name="golden_version">Golden version</string>
+    <string name="heroes">Heroes</string>
+    <string name="cards">Cards</string>
 </resources>

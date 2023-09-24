@@ -12,29 +12,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.ricardorsdev.hearthstonesearch.R
-import com.ricardorsdev.hearthstonesearch.presentation.card_detail.component.rememberSwords
-import com.ricardorsdev.hearthstonesearch.presentation.card_detail.component.rememberWaterDrop
+import com.ricardorsdev.hearthstonesearch.presentation.card_list.component.CardDetailHeader
+import com.ricardorsdev.hearthstonesearch.presentation.card_list.component.CardExhibition
+import com.ricardorsdev.hearthstonesearch.presentation.card_list.component.CardStatusBar
+import com.ricardorsdev.hearthstonesearch.presentation.model.CardVersion
 
 @Composable
 fun CardDetailScreen(
@@ -49,135 +44,54 @@ fun CardDetailScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
                     ) {
-                        Text(
-                            modifier = Modifier.align(CenterHorizontally),
-                            text = card.name,
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                        AsyncImage(
-                            model = card.cropImage,
-                            contentDescription = stringResource(R.string.cropped_image),
-                            contentScale = ContentScale.FillWidth,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Divider()
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(IntrinsicSize.Min),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            Icon(
-                                Icons.Filled.Star,
-                                contentDescription = stringResource(id = R.string.tavern_tier),
-                                tint = Color.Yellow,
-                                modifier = Modifier
-                                    .height(20.dp)
-                                    .width(20.dp)
-                            )
-                            Text(
-                                text = "${card.battlegrounds.tier}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Icon(
-                                rememberSwords(),
-                                contentDescription = stringResource(id = R.string.tavern_tier),
-                                tint = Color.Yellow,
-                                modifier = Modifier
-                                    .height(20.dp)
-                                    .width(20.dp)
-                            )
-                            Text(
-                                text = "${card.attack}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Icon(
-                                rememberWaterDrop(),
-                                contentDescription = stringResource(id = R.string.tavern_tier),
-                                tint = Color.Red,
-                                modifier = Modifier
-                                    .height(20.dp)
-                                    .width(20.dp)
-                            )
-                            Text(
-                                text = "${card.health}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-
-                        Divider()
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        Text(
-                            text = stringResource(id = R.string.card_effect) + HtmlCompat.fromHtml(
-                                card.text,
-                                HtmlCompat.FROM_HTML_MODE_COMPACT
-                            ),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
+                        CardDetailHeader(title = card.name, imageUrl = card.cropImage)
                         Divider()
 
-                        Row(
+                        CardStatusBar(
+                            tier = card.battlegrounds.tier,
+                            health = card.health,
+                            attack = card.attack
+                        )
+                        Divider()
+
+                        Column(
                             modifier = Modifier
-                                .fillMaxWidth()
                                 .height(IntrinsicSize.Min)
+                                .fillMaxWidth()
+                                .padding(16.dp)
                         ) {
-                            Column(
-                                Modifier
-                                    .weight(1f)
-                                    .height(IntrinsicSize.Min)
-                                    .padding(8.dp),
-                                horizontalAlignment = CenterHorizontally
-                            ) {
-                                Text(
-                                    text = stringResource(id = R.string.normal_version),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    modifier = Modifier.weight(1f)
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                AsyncImage(
-                                    model = card.battlegrounds.image,
-                                    contentDescription = stringResource(R.string.card_image),
-                                    contentScale = ContentScale.FillBounds,
-                                    modifier = Modifier
-                                        .height(120.dp)
-                                        .width(80.dp)
-                                )
-                            }
-                            Divider(
-                                modifier = Modifier
-                                    .fillMaxHeight()
-                                    .width(1.dp)
+                            Text(
+                                text = "${stringResource(id = R.string.card_effect)}: ${
+                                    HtmlCompat.fromHtml(
+                                        card.text,
+                                        HtmlCompat.FROM_HTML_MODE_COMPACT
+                                    )
+                                }",
+                                style = MaterialTheme.typography.bodyMedium
                             )
-                            Column(
-                                Modifier
-                                    .weight(1f)
-                                    .height(IntrinsicSize.Min)
-                                    .padding(8.dp),
-                                horizontalAlignment = CenterHorizontally
+
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Divider()
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(IntrinsicSize.Min),
+                                horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
-                                Text(
-                                    text = stringResource(id = R.string.golden_version),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    modifier = Modifier.weight(1f)
+                                CardExhibition(
+                                    cardVersion = CardVersion.NORMAL,
+                                    imageUrl = card.battlegrounds.image
                                 )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                AsyncImage(
-                                    model = card.battlegrounds.imageGold,
-                                    contentDescription = stringResource(R.string.card_image),
-                                    contentScale = ContentScale.FillBounds,
-                                    alignment = Center,
+                                Divider(
                                     modifier = Modifier
-                                        .height(120.dp)
-                                        .width(80.dp)
+                                        .fillMaxHeight()
+                                        .width(1.dp)
+                                )
+                                CardExhibition(
+                                    cardVersion = CardVersion.GOLDEN,
+                                    imageUrl = card.battlegrounds.imageGold
                                 )
                             }
                         }
