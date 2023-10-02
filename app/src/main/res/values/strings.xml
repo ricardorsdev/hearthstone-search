@@ -10,4 +10,6 @@
     <string name="golden_version">Golden version</string>
     <string name="heroes">Heroes</string>
     <string name="cards">Cards</string>
+    <string name="loading_message">Please wait, your data is being fetched.</string>
+    <string name="retry">Retry</string>
 </resources>

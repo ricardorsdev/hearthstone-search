@@ -12,12 +12,10 @@ import javax.inject.Inject
 class GetCardsUseCase @Inject constructor(
     private val repository: CardRepository
 ) {
-    private val heroTier = 0
-
-    operator fun invoke(): Flow<Resource<List<Card>>> = flow {
+    operator fun invoke(page: Int): Flow<Resource<List<Card>>> = flow {
         try {
             emit(Resource.Loading<List<Card>>())
-            val cards = repository.getCards().filter { it.battlegrounds.tier != heroTier }
+            val cards = repository.getCards(page)
             emit(Resource.Success<List<Card>>(cards))
         } catch (e: HttpException) {
             emit(Resource.Error<List<Card>>(e.localizedMessage ?: "An unexpected error occured"))

@@ -14,4 +14,7 @@ object Constants {
     const val HEARTHSTONE_SHARED_PREFS = "hearthstone_shared_prefs"
     const val PREFS_ACCESS_TOKEN = "prefs_access_token"
     const val PARAM_CARD_ID = "cardId"
+    const val HERO_TIER = 0
+    const val INITIAL_TIER = 1
+    const val FINAL_TIER = 7
 }

@@ -1,5 +1,6 @@
 package com.ricardorsdev.hearthstonesearch.domain.use_case.get_heroes
 
+import com.ricardorsdev.hearthstonesearch.core.commons.Constants.HERO_TIER
 import com.ricardorsdev.hearthstonesearch.domain.model.Card
 import com.ricardorsdev.hearthstonesearch.domain.model.Resource
 import com.ricardorsdev.hearthstonesearch.domain.repository.CardRepository
@@ -12,12 +13,10 @@ import javax.inject.Inject
 class GetHeroesUseCase @Inject constructor(
     private val repository: CardRepository
 ) {
-    private val heroTier = 0
-
-    operator fun invoke(): Flow<Resource<List<Card>>> = flow {
+    operator fun invoke(page: Int): Flow<Resource<List<Card>>> = flow {
         try {
             emit(Resource.Loading<List<Card>>())
-            val cards = repository.getCards().filter { it.battlegrounds.tier == heroTier }
+            val cards = repository.getCards(page = page, tier = HERO_TIER)
             emit(Resource.Success<List<Card>>(cards))
         } catch (e: HttpException) {
             emit(Resource.Error<List<Card>>(e.localizedMessage ?: "An unexpected error occured"))

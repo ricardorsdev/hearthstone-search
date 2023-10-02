@@ -19,12 +19,14 @@ class HeroListViewModel @Inject constructor(
     private var _state: MutableState<HeroListUiState> = mutableStateOf(HeroListUiState.Loading)
     val state = _state
 
+    private var currentPage = 1
+
     init {
         getHeroes()
     }
 
     private fun getHeroes() {
-        getHeroesUseCase().onEach { resource ->
+        getHeroesUseCase(currentPage).onEach { resource ->
             when (resource) {
                 is Resource.Loading -> {
                     _state.value = HeroListUiState.Loading
